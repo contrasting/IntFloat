@@ -11,6 +11,14 @@ namespace IntFloat
             IntFloat two = new IntFloat(20000);
             IntFloat three = new IntFloat(35000);
             Assert.Equal(5.5f, (two + three).toFloat);
+        }      
+        
+        [Fact]
+        public void SubtractionTest()
+        {
+            IntFloat two = new IntFloat(20000);
+            IntFloat three = new IntFloat(35000);
+            Assert.Equal(-1.5f, (two - three).toFloat);
         }
 
         [Fact]

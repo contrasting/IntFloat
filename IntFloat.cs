@@ -7,7 +7,7 @@
         public const float MaxValue = int.MaxValue / (float) Scale;
 
         private int _rawValue;
-
+        public int rawValue => _rawValue;
         public float toFloat => _rawValue / (float) Scale;
 
         public IntFloat(int value)
@@ -23,7 +23,7 @@
         
         public static IntFloat operator -(IntFloat self, IntFloat other)
         {
-            self._rawValue += other._rawValue;
+            self._rawValue -= other._rawValue;
             return self;
         }
 
