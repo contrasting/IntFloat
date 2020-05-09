@@ -31,7 +31,7 @@
         public static IntFloat operator *(IntFloat self, IntFloat other)
         {
             self._rawValue *= other._rawValue;
-            self._scale *= other._scale;
+            self._rawValue /= self._scale;
             return self;
         }
 
