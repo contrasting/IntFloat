@@ -35,6 +35,8 @@ namespace IntFloat
             IntFloat b = new IntFloat(200);
             Assert.Equal(50f, (a / b).toFloat);
         }
+        
+        // some tests failing due to precision
 
         [Fact]
         public void DivisionTestFour()

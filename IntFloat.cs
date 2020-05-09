@@ -8,7 +8,6 @@
         private int _rawValue;
         private int _scale;
 
-        public int toFlooredInt => _rawValue / _scale;
         public float toFloat => _rawValue / (float) _scale;
 
         public IntFloat(int value)
@@ -38,7 +37,8 @@
 
         public static IntFloat operator /(IntFloat self, IntFloat other)
         {
-            self._rawValue /= other.toFlooredInt;
+            self._rawValue *= self._scale;
+            self._rawValue /= other._rawValue;
             return self;
         }
     }
