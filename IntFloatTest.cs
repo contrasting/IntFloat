@@ -1,10 +1,18 @@
 ﻿using System;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace IntFloat
 {
     public class IntFloatTest
     {
+        private readonly ITestOutputHelper _outputHelper;
+
+        public IntFloatTest(ITestOutputHelper _outputHelper)
+        {
+            this._outputHelper = _outputHelper;
+        }
+        
         [Fact]
         public void AdditionTest()
         {
@@ -75,6 +83,18 @@ namespace IntFloat
             IntFloat a = new IntFloat(365004);
             IntFloat b = new IntFloat(2012);
             AreEqualWithinPrecision(36.5004f * 0.2012f, a * b);
+        }
+
+        [Fact]
+        public void OverflowCheck()
+        {
+            IntFloat a = new IntFloat(202050365);
+            IntFloat b = new IntFloat(200002012);
+
+            Assert.Throws<OverflowException>(() =>
+            {
+                IntFloat c = a * b;
+            });
         }
 
         public static void AreEqualWithinPrecision(float f, IntFloat i)

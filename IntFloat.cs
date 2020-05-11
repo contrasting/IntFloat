@@ -1,4 +1,6 @@
-﻿namespace IntFloat
+﻿using System;
+
+namespace IntFloat
 {
     public struct IntFloat
     {
@@ -17,33 +19,38 @@
 
         public static IntFloat operator +(IntFloat self, IntFloat other)
         {
-            self._rawValue += other._rawValue;
-            return self;
+            return new IntFloat(self._rawValue + other._rawValue);
         }
         
         public static IntFloat operator -(IntFloat self, IntFloat other)
         {
-            self._rawValue -= other._rawValue;
-            return self;
+            return new IntFloat(self._rawValue - other._rawValue);
         }
 
         public static IntFloat operator *(IntFloat self, IntFloat other)
         {
-            self._rawValue *= other._rawValue;
-            self._rawValue /= Scale;
-            return self;
+            long tempRaw = checked(self._rawValue * (long) other._rawValue);
+            tempRaw /= Scale;
+            if (tempRaw > int.MaxValue) throw new OverflowException("Operation result out of representable range!");
+            return new IntFloat((int) tempRaw);
         }
 
         public static IntFloat operator /(IntFloat self, IntFloat other)
         {
-            self._rawValue *= Scale;
-            self._rawValue /= other._rawValue;
-            return self;
+            long tempRaw = checked(self._rawValue * (long) Scale);
+            tempRaw /= other._rawValue;
+            if (tempRaw > int.MaxValue) throw new OverflowException("Operation result out of representable range!");
+            return new IntFloat((int) tempRaw);
         }
 
         public static explicit operator float(IntFloat i)
         {
             return i.toFloat;
+        }
+
+        public override string ToString()
+        {
+            return this.toFloat.ToString();
         }
     }
 }

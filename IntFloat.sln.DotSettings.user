@@ -3,4 +3,9 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::D084E86B-5D88-44D4-B624-6239DE8C9664::.NETFramework,Version=v4.8::IntFloat.IntFloatTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8500f005_002D55fa_002D4df3_002Db9f4_002D3990d4ee67c1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="OverflowCheck" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::D084E86B-5D88-44D4-B624-6239DE8C9664::.NETFramework,Version=v4.8::IntFloat.IntFloatTest.OverflowCheck&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
