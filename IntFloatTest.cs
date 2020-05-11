@@ -133,6 +133,14 @@ namespace IntFloatLib
             Assert.True(IntFloat.RoundToInt(new IntFloat(24999)) == 2);
         }
 
+        [Fact]
+        public void RoundToIntNegTest()
+        {
+            Assert.True(IntFloat.RoundToInt(new IntFloat(-25001)) == -3);
+            Assert.True(IntFloat.RoundToInt(new IntFloat(-25000)) == -3);
+            Assert.True(IntFloat.RoundToInt(new IntFloat(-24999)) == -2);
+        }
+
         public static void AreEqualWithinPrecision(double f, IntFloat i)
         {
             Assert.True(Math.Abs(i.toDouble - f) < IntFloat.Epsilon);

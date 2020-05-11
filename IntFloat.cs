@@ -189,11 +189,12 @@ namespace IntFloatLib
         public static int RoundToInt(IntFloat self)
         {
             int remainder = self._rawValue % Scale;
-            if (remainder >= Scale / 2)
+            int sign = Math.Sign(remainder);
+            if (Math.Abs(remainder) >= Scale / 2)
             {
-                return self._rawValue / Scale + 1;
+                return self._rawValue / Scale + sign * 1;
             }
-
+            
             return self._rawValue / Scale;
         }
 
