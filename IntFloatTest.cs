@@ -104,9 +104,22 @@ namespace IntFloatLib
             Assert.Equal(20f, (IntFloat.FromInt(20)).toFloat);
         }
 
-        public static void AreEqualWithinPrecision(float f, IntFloat i)
+        [Fact]
+        public void SqrtTest()
         {
-            Assert.True(Math.Abs(i.toFloat - f) < IntFloat.Epsilon);
+            Assert.Equal(20f, IntFloat.Sqrt(400 * IntFloat.One).toFloat);
+        }        
+        
+        [Fact]
+        public void SqrtTestTwo()
+        {
+            int whatever = 15231;
+            AreEqualWithinPrecision(Math.Sqrt(whatever), IntFloat.Sqrt(whatever * IntFloat.One));
+        }
+
+        public static void AreEqualWithinPrecision(double f, IntFloat i)
+        {
+            Assert.True(Math.Abs(i.toDouble - f) < IntFloat.Epsilon);
         }
     }
 }
