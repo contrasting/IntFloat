@@ -117,6 +117,22 @@ namespace IntFloatLib
             AreEqualWithinPrecision(Math.Sqrt(whatever), IntFloat.Sqrt(whatever * IntFloat.One));
         }
 
+        [Fact]
+        public void AbsMaxMinTest()
+        {
+            Assert.True(IntFloat.Abs(new IntFloat(-1000)) == new IntFloat(1000));
+            Assert.True(IntFloat.Max(IntFloat.One, IntFloat.Zero) == IntFloat.One);
+            Assert.True(IntFloat.Min(IntFloat.One, IntFloat.Zero) == IntFloat.Zero);
+        }
+
+        [Fact]
+        public void RoundToIntTest()
+        {
+            Assert.True(IntFloat.RoundToInt(new IntFloat(25001)) == 3);
+            Assert.True(IntFloat.RoundToInt(new IntFloat(25000)) == 3);
+            Assert.True(IntFloat.RoundToInt(new IntFloat(24999)) == 2);
+        }
+
         public static void AreEqualWithinPrecision(double f, IntFloat i)
         {
             Assert.True(Math.Abs(i.toDouble - f) < IntFloat.Epsilon);

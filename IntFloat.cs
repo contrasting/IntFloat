@@ -80,11 +80,26 @@ namespace IntFloatLib
         public static bool operator >(IntFloat self, IntFloat other)
         {
             return self._rawValue > other._rawValue;
+        }        
+        
+        public static bool operator <=(IntFloat self, IntFloat other)
+        {
+            return self._rawValue <= other._rawValue;
         }
 
-        public static explicit operator float(IntFloat i)
+        public static bool operator >=(IntFloat self, IntFloat other)
         {
-            return i.toFloat;
+            return self._rawValue >= other._rawValue;
+        }
+
+        public static IntFloat operator ++(IntFloat self)
+        {
+            return self + One;
+        }
+
+        public static IntFloat operator --(IntFloat self)
+        {
+            return self - One;
         }
 
         public static IntFloat operator *(IntFloat self, int i)
@@ -98,6 +113,30 @@ namespace IntFloatLib
             return self * i;
         }
         
+        #endregion
+
+        #region Explicit Cast Operators
+
+        public static explicit operator float(IntFloat i)
+        {
+            return i.toFloat;
+        }        
+        
+        public static explicit operator int(IntFloat i)
+        {
+            return i._rawValue / Scale;
+        }
+
+        public static explicit operator IntFloat(int i)
+        {
+            return FromInt(i);
+        }        
+        
+        public static explicit operator IntFloat(float f)
+        {
+            return FromFloat(f);
+        }
+
         #endregion
 
         #region Other Operations
@@ -132,6 +171,32 @@ namespace IntFloatLib
             return new IntFloat((int) n); 
         }
 
+        public static IntFloat Abs(IntFloat self)
+        {
+            return new IntFloat(Math.Abs(self._rawValue));
+        }
+
+        public static IntFloat Max(IntFloat a, IntFloat b)
+        {
+            return a > b ? a : b;
+        }
+        
+        public static IntFloat Min(IntFloat a, IntFloat b)
+        {
+            return a < b ? a : b;
+        }
+
+        public static int RoundToInt(IntFloat self)
+        {
+            int remainder = self._rawValue % Scale;
+            if (remainder >= Scale / 2)
+            {
+                return self._rawValue / Scale + 1;
+            }
+
+            return self._rawValue / Scale;
+        }
+
         #endregion
 
         #region Helper Functions
@@ -139,6 +204,12 @@ namespace IntFloatLib
         public static IntFloat FromInt(int i)
         {
             return new IntFloat(i * Scale);
+        }
+
+        public static IntFloat FromFloat(float f)
+        {
+            // use with care: float math risks non-determinism on different machines
+            return new IntFloat((int) (f * Scale));
         }
  
         public static IntFloat FromRaw(int raw)
