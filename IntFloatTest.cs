@@ -2,7 +2,7 @@
 using Xunit;
 using Xunit.Abstractions;
 
-namespace IntFloat
+namespace IntFloatLib
 {
     public class IntFloatTest
     {
@@ -95,6 +95,13 @@ namespace IntFloat
             {
                 IntFloat c = a * b;
             });
+        }
+
+        [Fact]
+        public void MultiplyByIntTest()
+        {
+            Assert.Equal(20f, (20 * IntFloat.One).toFloat);
+            Assert.Equal(20f, (IntFloat.FromInt(20)).toFloat);
         }
 
         public static void AreEqualWithinPrecision(float f, IntFloat i)
