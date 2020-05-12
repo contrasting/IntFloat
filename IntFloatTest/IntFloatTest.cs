@@ -1,8 +1,9 @@
 ﻿using System;
 using Xunit;
 using Xunit.Abstractions;
+using IntFloatLib;
 
-namespace IntFloatLib
+namespace IntFloatTest
 {
     public class IntFloatTest
     {

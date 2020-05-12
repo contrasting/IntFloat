@@ -9,6 +9,11 @@
     &lt;TestId&gt;xUnit::D084E86B-5D88-44D4-B624-6239DE8C9664::.NETFramework,Version=v4.8::IntFloatLib.IntFloatTest.MultiplyIntTest&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=95fdbe7e_002D93d8_002D456b_002D9680_002D278cc0987ab7/@EntryIndexedValue">&lt;SessionState ContinuousTestingIsOn="False" ContinuousTestingMode="0" FrameworkVersion="{x:Null}" IsLocked="False" Name="IntFloatTest #2" PlatformMonoPreference="{x:Null}" PlatformType="{x:Null}" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::D084E86B-5D88-44D4-B624-6239DE8C9664::.NETFramework,Version=v4.8::IntFloatLib.IntFloatTest&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d76a92d4_002D8e17_002D4774_002D84fe_002Dfda0cf14d71e/@EntryIndexedValue">&lt;SessionState ContinuousTestingIsOn="False" ContinuousTestingMode="0" FrameworkVersion="{x:Null}" IsLocked="False" Name="IntFloatTest" PlatformMonoPreference="{x:Null}" PlatformType="{x:Null}" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::D084E86B-5D88-44D4-B624-6239DE8C9664::.NETFramework,Version=v4.8::IntFloatLib.IntFloatTest&lt;/TestId&gt;
@@ -16,6 +21,7 @@
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f17cfd39_002D3fd2_002D4f3f_002D8318_002Dcd65a8695ce7/@EntryIndexedValue">&lt;SessionState ContinuousTestingIsOn="False" ContinuousTestingMode="0" FrameworkVersion="{x:Null}" IsLocked="False" Name="SqrtTest" PlatformMonoPreference="{x:Null}" PlatformType="{x:Null}" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;
   &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::D084E86B-5D88-44D4-B624-6239DE8C9664::.NETFramework,Version=v4.8::IntFloatLib.IntFloatTest.SqrtTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::A9C30096-4836-40F2-9B41-AB4BFFFF38B8::.NETFramework,Version=v4.8::IntFloatTest.IntFloatTest&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+&lt;/SessionState&gt;</s:String>
+	</wpf:ResourceDictionary>
