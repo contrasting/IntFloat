@@ -17,40 +17,40 @@ namespace IntFloatTest
         [Fact]
         public void AdditionTest()
         {
-            IntFloat two = new IntFloat(20000);
-            IntFloat three = new IntFloat(35000);
-            Assert.Equal(5.5f, (two + three).toFloat);
+            IntFloat two = IntFloat.FromInt(2);
+            IntFloat threeHalf = IntFloat.FromFloat(3.5f);
+            Assert.Equal(5.5f, (two + threeHalf).toFloat);
         }      
         
         [Fact]
         public void SubtractionTest()
         {
-            IntFloat two = new IntFloat(20000);
-            IntFloat three = new IntFloat(35000);
-            Assert.Equal(-1.5f, (two - three).toFloat);
+            IntFloat two = IntFloat.FromInt(2);
+            IntFloat threeHalf = IntFloat.FromFloat(3.5f);
+            Assert.Equal(-1.5f, (two - threeHalf).toFloat);
         }
 
         [Fact]
         public void DivisionTestOne()
         {
-            IntFloat three = new IntFloat(30000);
-            IntFloat two = new IntFloat(20000);
+            IntFloat three = IntFloat.FromInt(3);
+            IntFloat two = IntFloat.FromInt(2);
             Assert.Equal(1.5f, (three / two).toFloat);
         }           
         
         [Fact]
         public void DivisionTestTwo()
         {
-            IntFloat a = new IntFloat(2000);
-            IntFloat b = new IntFloat(100000);
+            IntFloat a = IntFloat.FromFloat(0.2f);
+            IntFloat b = IntFloat.FromInt(10);
             Assert.Equal(0.02f, (a / b).toFloat);
         }       
         
         [Fact]
         public void DivisionTestThree()
         {
-            IntFloat a = new IntFloat(100000);
-            IntFloat b = new IntFloat(2000);
+            IntFloat a = IntFloat.FromInt(10);
+            IntFloat b = IntFloat.FromFloat(0.2f);
             Assert.Equal(50f, (a / b).toFloat);
         }
         
@@ -73,8 +73,8 @@ namespace IntFloatTest
         [Fact]
         public void MultiplicationTest()
         {
-            IntFloat a = new IntFloat(100000);
-            IntFloat b = new IntFloat(2000);
+            IntFloat a = IntFloat.FromInt(10);
+            IntFloat b = IntFloat.FromFloat(0.2f);
             Assert.Equal(2f, (a * b).toFloat);
         }
 
@@ -129,17 +129,19 @@ namespace IntFloatTest
         [Fact]
         public void RoundToIntTest()
         {
-            Assert.True(IntFloat.RoundToInt(new IntFloat(25001)) == 3);
-            Assert.True(IntFloat.RoundToInt(new IntFloat(25000)) == 3);
-            Assert.True(IntFloat.RoundToInt(new IntFloat(24999)) == 2);
+            int halfScale = IntFloat.Scale / 2;
+            Assert.True(IntFloat.RoundToInt(new IntFloat(halfScale * 5 + 1)) == 3);
+            Assert.True(IntFloat.RoundToInt(new IntFloat(halfScale * 5)) == 3);
+            Assert.True(IntFloat.RoundToInt(new IntFloat(halfScale * 5 - 1)) == 2);
         }
 
         [Fact]
         public void RoundToIntNegTest()
         {
-            Assert.True(IntFloat.RoundToInt(new IntFloat(-25001)) == -3);
-            Assert.True(IntFloat.RoundToInt(new IntFloat(-25000)) == -3);
-            Assert.True(IntFloat.RoundToInt(new IntFloat(-24999)) == -2);
+            int halfScale = IntFloat.Scale / 2;
+            Assert.True(IntFloat.RoundToInt(new IntFloat(-halfScale * 5 - 1)) == -3);
+            Assert.True(IntFloat.RoundToInt(new IntFloat(-halfScale * 5)) == -3);
+            Assert.True(IntFloat.RoundToInt(new IntFloat(-halfScale * 5 + 1)) == -2);
         }
 
         public static void AreEqualWithinPrecision(double f, IntFloat i)

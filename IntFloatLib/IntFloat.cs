@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 
 namespace IntFloatLib
 {
@@ -11,7 +11,7 @@ namespace IntFloatLib
         
         #region Constants
         
-        public const int Scale = 10000;
+        public const int Scale = 1000;
         public const float Epsilon = 1f / Scale;
         public const float MaxValue = int.MaxValue / (float) Scale;
         
@@ -46,7 +46,7 @@ namespace IntFloatLib
             long tempRaw = checked(self._rawValue * (long) other._rawValue);
             tempRaw /= Scale;
             if (tempRaw > int.MaxValue || tempRaw < int.MinValue)
-                throw new OverflowException("Operation result out of representable range!");
+                throw new OverflowException($"Raw value {tempRaw} is out of representable range!");
             return new IntFloat((int) tempRaw);
         }
 
@@ -55,7 +55,7 @@ namespace IntFloatLib
             long tempRaw = checked(self._rawValue * (long) Scale);
             tempRaw /= other._rawValue;
             if (tempRaw > int.MaxValue || tempRaw < int.MinValue)
-                throw new OverflowException("Operation result out of representable range!");
+                throw new OverflowException($"Raw value {tempRaw} is out of representable range!");
             return new IntFloat((int) tempRaw);
         }
 
