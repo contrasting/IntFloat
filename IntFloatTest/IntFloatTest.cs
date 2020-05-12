@@ -144,6 +144,14 @@ namespace IntFloatTest
             Assert.True(IntFloat.RoundToInt(new IntFloat(-halfScale * 5 + 1)) == -2);
         }
 
+        [Fact]
+        public void VectorMagnitudeTest()
+        {
+            IntFloat a = 3 * IntFloat.One;
+            IntFloat b = 4 * IntFloat.One;
+            Assert.True(IntFloat.Magnitude(a, b) == 5 * IntFloat.One);
+        }
+
         public static void AreEqualWithinPrecision(double f, IntFloat i)
         {
             Assert.True(Math.Abs(i.toDouble - f) < IntFloat.Epsilon);

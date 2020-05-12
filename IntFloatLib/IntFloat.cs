@@ -202,6 +202,35 @@ namespace IntFloatLib
 
         #endregion
 
+        #region Vector Operations
+
+        /// <summary>
+        /// Returns the magnitude of a vector (a, b). Provided because often the square magnitude will overflow.
+        /// </summary>
+        public static IntFloat Magnitude(IntFloat a, IntFloat b)
+        {
+            long num = checked(a._rawValue * (long) a._rawValue + b._rawValue * (long) b._rawValue);
+            
+            if (num == 0)
+            {
+                return Zero;
+            }
+
+            long n = num / 2 + 1; 
+            long n1 = (n + num / n) / 2;  
+            while (n1 < n)
+            {  
+                n = n1;  
+                n1 = (n + num / n) / 2;  
+            }
+            
+            if (n > int.MaxValue) throw new OverflowException("Result of square root out of representable range");
+            
+            return new IntFloat((int) n);
+        }
+
+        #endregion
+
         #region Helper Functions
         
         public static IntFloat FromInt(int i)
