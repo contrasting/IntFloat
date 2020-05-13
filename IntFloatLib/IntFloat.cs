@@ -1,14 +1,26 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace IntFloatLib
 {
-    public readonly struct IntFloat : IEquatable<IntFloat>, IComparable<IntFloat>
+    [Serializable]
+    public readonly struct IntFloat : IEquatable<IntFloat>, IComparable<IntFloat>, ISerializable
     {
         public IntFloat(int value)
         {
             _rawValue = value;
         }
-        
+
+        public IntFloat(SerializationInfo info, StreamingContext context)
+        {
+            _rawValue = info.GetInt32(nameof(rawValue));
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue(nameof(rawValue), _rawValue);
+        }
+
         #region Constants
         
         public const int Scale = 1000;
