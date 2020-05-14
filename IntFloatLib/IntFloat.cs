@@ -29,6 +29,9 @@ namespace IntFloatLib
         
         public static readonly IntFloat Zero = new IntFloat();
         public static readonly IntFloat One = new IntFloat(Scale);
+        // values dependent on Scale
+        public static readonly IntFloat Pi = new IntFloat(3142);
+        public static readonly IntFloat PiOver2 = Pi / 2;
         
         #endregion
 
@@ -125,6 +128,12 @@ namespace IntFloatLib
         public static IntFloat operator *(int i, IntFloat self)
         {
             return self * i;
+        }
+        
+        public static IntFloat operator /(IntFloat self, int i)
+        {
+            // divide by int, can't possibly overflow
+            return new IntFloat(self._rawValue / i);
         }
         
         #endregion
@@ -239,6 +248,68 @@ namespace IntFloatLib
             if (n > int.MaxValue) throw new OverflowException("Result of square root out of representable range");
             
             return new IntFloat((int) n);
+        }
+
+        // courtesy of https://www.dsprelated.com/showarticle/1052.php
+        public static IntFloat Atan(IntFloat z)
+        {
+            // note: change these constants if you change the scale
+            IntFloat n1 = new IntFloat(972);
+            IntFloat n2 = new IntFloat(-192);
+            return (n1 + n2 * z * z) * z;
+        }
+
+        // note: the precision of this function can fluctuate.
+        public static IntFloat Atan2(IntFloat y, IntFloat x)
+        {
+            if (x != Zero)
+            {
+                if (Abs(x) > Abs(y))
+                {
+                    IntFloat z = y / x;
+                    if (x > Zero)
+                    {
+                        // atan2(y,x) = atan(y/x) if x > 0
+                        return Atan(z);
+                    }
+                    else if (y >= Zero)
+                    {
+                        // atan2(y,x) = atan(y/x) + PI if x < 0, y >= 0
+                        return Atan(z) + Pi;
+                    }
+                    else
+                    {
+                        // atan2(y,x) = atan(y/x) - PI if x < 0, y < 0
+                        return Atan(z) - Pi;
+                    }
+                }
+                else // Use property atan(y/x) = PI/2 - atan(x/y) if |y/x| > 1.
+                {
+                    IntFloat z = x / y;
+                    if (y > Zero)
+                    {
+                        // atan2(y,x) = PI/2 - atan(x/y) if |y/x| > 1, y > 0
+                        return -Atan(z) + PiOver2;
+                    }
+                    else
+                    {
+                        // atan2(y,x) = -PI/2 - atan(x/y) if |y/x| > 1, y < 0
+                        return -Atan(z) - PiOver2;
+                    }
+                }
+            }
+            else
+            {
+                if (y > Zero) // x = 0, y > 0
+                {
+                    return PiOver2;
+                }
+                else if (y < Zero) // x = 0, y < 0
+                {
+                    return -PiOver2;
+                }
+            }
+            return Zero; // x,y = 0. Could return NaN instead.
         }
 
         #endregion

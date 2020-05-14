@@ -152,9 +152,62 @@ namespace IntFloatTest
             Assert.True(IntFloat.Magnitude(a, b) == 5 * IntFloat.One);
         }
 
+        [Fact]
+        public void PlusPlusTest()
+        {
+            IntFloat a = IntFloat.One;
+            a++;
+            Assert.True(a == 2 * IntFloat.One);
+        }
+
+        [Fact]
+        public void Atan2TestOne()
+        {
+            IntFloat y = new IntFloat(1732); // root 3
+            IntFloat x = IntFloat.FromInt(3);
+            _outputHelper.WriteLine((IntFloat.Pi / 6).ToString());
+            _outputHelper.WriteLine(IntFloat.Atan2(y, x).ToString());
+            AreEqualWithinPrecision(IntFloat.Pi / 6, IntFloat.Atan2(y, x));
+        }        
+        
+        [Fact]
+        public void Atan2TestTwo()
+        {
+            IntFloat y = IntFloat.FromInt(3);
+            IntFloat x = IntFloat.FromInt(3);
+            _outputHelper.WriteLine((IntFloat.Pi / 4).ToString());
+            _outputHelper.WriteLine(IntFloat.Atan2(y, x).ToString());
+            AreEqualWithinPrecision(IntFloat.Pi / 4,IntFloat.Atan2(y, x));
+        }        
+        
+        [Fact]
+        public void Atan2TestThree()
+        {
+            IntFloat y = IntFloat.FromInt(3);
+            IntFloat x = IntFloat.FromRaw(1732);
+            _outputHelper.WriteLine((IntFloat.Pi / 3).ToString());
+            _outputHelper.WriteLine(IntFloat.Atan2(y, x).ToString());
+            AreEqualWithinPrecision(IntFloat.Pi / 3, IntFloat.Atan2(y, x));
+        }
+        
+        [Fact]
+        public void Atan2TestFour()
+        {
+            IntFloat y = IntFloat.FromInt(-3);
+            IntFloat x = IntFloat.FromInt(-3);
+            _outputHelper.WriteLine((-3 * IntFloat.Pi / 4).ToString());
+            _outputHelper.WriteLine(IntFloat.Atan2(y, x).ToString());
+            AreEqualWithinPrecision(-3 * IntFloat.Pi / 4,IntFloat.Atan2(y, x));
+        }       
+        
         public static void AreEqualWithinPrecision(double f, IntFloat i)
         {
             Assert.True(Math.Abs(i.toDouble - f) < IntFloat.Epsilon);
+        }
+        
+        public static void AreEqualWithinPrecision(IntFloat a, IntFloat b)
+        {
+            Assert.True(IntFloat.Abs(a - b).rawValue <= 1);
         }
     }
 }
