@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.Serialization;
 
 namespace IntFloatLib
@@ -165,6 +165,11 @@ namespace IntFloatLib
 
         #region Other Operations
 
+        public static IntFloat Square(IntFloat self)
+        {
+            return self * self;
+        }
+
         public static IntFloat Sqrt(IntFloat self)
         {
             if (self._rawValue < 0)
@@ -314,18 +319,10 @@ namespace IntFloatLib
             }
             return Zero; // x,y = 0. Could return NaN instead.
         }
-        
-        // For use in sine approximation. Values dependent on scale
-        private static readonly IntFloat A = new IntFloat(955);
-        private static readonly IntFloat B = new IntFloat(129);
 
         // courtesy of https://www.coranac.com/2009/07/sines/.
         // Plot at https://www.desmos.com/calculator/xxkkb0gmvw
-        // I'm using a third order polynomial approximation
-        
-        /// <summary>
-        /// Warning: use with caution, suffers from low accuracy.
-        /// </summary>
+        // I'm using a fifth order polynomial approximation
         public static IntFloat Sin(IntFloat x)
         {
             // clamp to unit circle
@@ -347,7 +344,11 @@ namespace IntFloatLib
                 return Sin(-Pi - x);
             }
 
-            IntFloat result = A * x - B * x * x * x;
+            IntFloat a = Square(2 * x / Pi);
+            IntFloat b = Pi - a * ((TwoPi - 5 * One) - a * (Pi - 3 * One));
+            // multiply FIRST then divide preserves more accuracy!
+            IntFloat result = x * b / Pi;
+
             // clamp to abs value of 1
             return result > Zero ? Min(result, One) : Max(result, -One);
         }
