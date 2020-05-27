@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace IntFloatLib
@@ -351,6 +351,12 @@ namespace IntFloatLib
 
             // clamp to abs value of 1
             return result > Zero ? Min(result, One) : Max(result, -One);
+        }
+
+        // cos is just shift of sin by -pi/2    
+        public static IntFloat Cos(IntFloat x)
+        {
+            return Sin(x + PiOver2);
         }
 
         #endregion

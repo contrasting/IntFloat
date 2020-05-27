@@ -31,4 +31,9 @@ A. Yeah, I'm not a very smart guy, so I need something dumb and easy to use :)
 
 **Q. What's missing?**
 
-A. Trig operations. I'll get round to them eventually.
+A. Some trig operations. Feel free to pull request.
+
+**Q. How fast is this?**
+
+I haven't profiled the performance, but aside from the trig/vector operations, the most complex calculations are long arithmetic. 
+So theoretically, it's as fast as long math is on your machine, plus the overhead of a function call.
