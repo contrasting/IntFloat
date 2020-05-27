@@ -200,6 +200,40 @@ namespace IntFloatTest
             AreEqualWithinPrecision(-3 * IntFloat.Pi / 4,IntFloat.Atan2(y, x));
         }       
         
+        [Fact]
+        public void SinTestOne()
+        {
+            _outputHelper.WriteLine(IntFloat.Sin(IntFloat.Pi).ToString());
+            AreEqualWithinPrecision(IntFloat.Sin(IntFloat.Pi), IntFloat.Zero);
+        }               
+        
+        [Fact]
+        public void SinTestTwo()
+        {
+            _outputHelper.WriteLine(IntFloat.Sin(IntFloat.Pi / 6).ToString());
+            AreEqualWithinPrecision(IntFloat.Sin(IntFloat.Pi / 6), IntFloat.One / 2);
+        }            
+        
+        [Fact]
+        public void SinTestThree()
+        {
+            IntFloat y = new IntFloat(1732); // root 3
+            IntFloat x = IntFloat.FromInt(2);
+            _outputHelper.WriteLine(IntFloat.Sin(IntFloat.Pi / 3).ToString());
+            _outputHelper.WriteLine((y / x).ToString());
+            AreEqualWithinPrecision(IntFloat.Sin(IntFloat.Pi / 3), y / x);
+        }           
+        
+        [Fact]
+        public void SinTestFour()
+        {
+            IntFloat y = new IntFloat(1732); // root 3
+            IntFloat x = IntFloat.FromInt(2);
+            _outputHelper.WriteLine(IntFloat.Sin(-IntFloat.Pi + IntFloat.Pi / 3).ToString());
+            _outputHelper.WriteLine((-y / x).ToString());
+            AreEqualWithinPrecision(IntFloat.Sin(-IntFloat.Pi + IntFloat.Pi / 3), -y / x);
+        }       
+        
         public static void AreEqualWithinPrecision(double f, IntFloat i)
         {
             Assert.True(Math.Abs(i.toDouble - f) < IntFloat.Epsilon);

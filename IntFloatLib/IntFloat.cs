@@ -30,8 +30,9 @@ namespace IntFloatLib
         public static readonly IntFloat Zero = new IntFloat();
         public static readonly IntFloat One = new IntFloat(Scale);
         // values dependent on Scale
+        public static readonly IntFloat TwoPi = new IntFloat(6283);
         public static readonly IntFloat Pi = new IntFloat(3142);
-        public static readonly IntFloat PiOver2 = Pi / 2;
+        public static readonly IntFloat PiOver2 = new IntFloat(1571);
         
         #endregion
 
@@ -258,8 +259,10 @@ namespace IntFloatLib
             IntFloat n2 = new IntFloat(-192);
             return (n1 + n2 * z * z) * z;
         }
-
-        // note: the precision of this function can fluctuate.
+        
+        /// <summary>
+        /// Note: the precision of this function can fluctuate.
+        /// </summary>
         public static IntFloat Atan2(IntFloat y, IntFloat x)
         {
             if (x != Zero)
@@ -310,6 +313,43 @@ namespace IntFloatLib
                 }
             }
             return Zero; // x,y = 0. Could return NaN instead.
+        }
+        
+        // For use in sine approximation. Values dependent on scale
+        private static readonly IntFloat A = new IntFloat(955);
+        private static readonly IntFloat B = new IntFloat(129);
+
+        // courtesy of https://www.coranac.com/2009/07/sines/.
+        // Plot at https://www.desmos.com/calculator/xxkkb0gmvw
+        // I'm using a third order polynomial approximation
+        
+        /// <summary>
+        /// Warning: use with caution, suffers from low accuracy.
+        /// </summary>
+        public static IntFloat Sin(IntFloat x)
+        {
+            // clamp to unit circle
+            if (x > Pi)
+            {
+                while (x > Pi) x -= TwoPi;
+            }
+            else if (x < -Pi)
+            {
+                while (x < -Pi) x += TwoPi;
+            }
+            
+            if (x > PiOver2)
+            {
+                return Sin(Pi - x);
+            }
+            else if (x < -PiOver2)
+            {
+                return Sin(-Pi - x);
+            }
+
+            IntFloat result = A * x - B * x * x * x;
+            // clamp to abs value of 1
+            return result > Zero ? Min(result, One) : Max(result, -One);
         }
 
         #endregion
