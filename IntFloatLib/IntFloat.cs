@@ -215,6 +215,13 @@ namespace IntFloatLib
             return a < b ? a : b;
         }
 
+        public static IntFloat Clamp(IntFloat value, IntFloat min, IntFloat max)
+        {
+            if (value < min) return min;
+            if (value > max) return max;
+            return value;
+        }
+
         public static int RoundToInt(IntFloat self)
         {
             int remainder = self._rawValue % Scale;
@@ -350,7 +357,7 @@ namespace IntFloatLib
             IntFloat result = x * b / Pi;
 
             // clamp to abs value of 1
-            return result > Zero ? Min(result, One) : Max(result, -One);
+            return Clamp(result, -One, One);
         }
 
         // cos is just shift of sin by -pi/2    

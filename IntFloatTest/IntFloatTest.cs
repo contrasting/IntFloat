@@ -146,6 +146,24 @@ namespace IntFloatTest
         }
 
         [Fact]
+        public void ClampTestOne()
+        {
+            AreEqualWithinPrecision(One, Clamp(Pi, Zero, One));
+        }        
+        
+        [Fact]
+        public void ClampTestTwo()
+        {
+            AreEqualWithinPrecision(Zero, Clamp(-Pi, Zero, One));
+        }      
+        
+        [Fact]
+        public void ClampTestThree()
+        {
+            AreEqualWithinPrecision(One, Clamp(One, Zero, Pi));
+        }
+
+        [Fact]
         public void VectorMagnitudeTest()
         {
             IntFloat a = 3 * One;
